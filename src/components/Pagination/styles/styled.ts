@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Button = styled.button`
   display: inline-block;
   height: 20px;
-  padding: 0;
+  padding: 0 5px;
   background: transparent;
   border: solid 1px black;
   border-radius: 4px;
@@ -28,17 +28,16 @@ export const Button = styled.button`
 
   &:disabled {
     background: transparent;
-    border: solid 1px grey;
+    border: solid 1px lightgrey;
     color: grey;
     cursor: default;
   }
 `;
 
-export const ButtonContent = styled.span`
+export const Chevron = styled.span`
   color: black;
-  font-size: 1.3em;
-  &.material-symbols-outlined {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  &:hover {
+    color: white;
   }
 `;
 
@@ -86,15 +85,6 @@ export const VisibleButton = styled(Button)`
   font-size: 0.8em;
 `;
 
-export const VisibleButtonDotsLeft = styled(VisibleButton)`
-  &::before {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: black;
-  }
-`;
-
 export const VisibleButtonDotsRight = styled(VisibleButton)`
   &::after {
     content: "...";
@@ -109,5 +99,5 @@ export const VisibleButtonDotsRight = styled(VisibleButton)`
 //   .page--btn--container {
 //     margin-bottom: 20px;
 //   }
-  
+
 // }

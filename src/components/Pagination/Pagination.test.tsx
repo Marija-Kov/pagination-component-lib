@@ -10,8 +10,8 @@ describe("Pagination", () => {
 
     const firstPageBtn = getByText("1");
     const lastPageBtn = getByText("34");
-    const prevPageBtn = getByText("chevron_left");
-    const nextPageBtn = getByText("chevron_right");
+    const prevPageBtn = getByText("previous");
+    const nextPageBtn = getByText("next");
     const hiddenPageBtn = queryByText("14");
 
     expect(firstPageBtn).toBeInTheDocument();

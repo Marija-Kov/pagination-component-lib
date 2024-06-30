@@ -23,9 +23,16 @@ export default {
   },
 };
 
-export const PaginationOne = {
+export const ManyPages = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 100,
+  },
+};
+
+export const DisabledChevrons = {
+  args: {
+    itemsLimitPerPage: 3,
+    totalItemsCount: 1,
   },
 };

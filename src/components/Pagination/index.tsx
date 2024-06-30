@@ -2,14 +2,13 @@ import { type PaginationProps } from "./types";
 import {
   Container,
   Button,
-  VisibleButtonDotsLeft,
   VisibleButtonDotsRight,
   VisibleButton,
   CurrentPageButton,
   CurrentPageButtonDotsAround,
   CurrentPageButtonDotsLeft,
   CurrentPageButtonDotsRight,
-  ButtonContent,
+  Chevron,
 } from "./styles/styled";
 
 import { useState } from "react";
@@ -20,21 +19,21 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pages = (totalItemsCount: number, itemsLimitPerPage: number) => {
+  function pages(totalItemsCount: number, itemsLimitPerPage: number) {
     const pagesCount = Math.ceil(totalItemsCount / itemsLimitPerPage);
     const result = [];
     for (let i = 1; i <= pagesCount; ++i) {
       result.push(i);
     }
     return result;
-  };
+  }
 
-  const btnIsDisabled = () => {
-    return (currentPage + 1) * itemsLimitPerPage >= totalItemsCount;
-  };
+  function isDisabled() {
+    return currentPage * itemsLimitPerPage >= totalItemsCount;
+  }
 
   function styledButton(currentPage: number, aPage: number, pages: number[]) {
-    if (currentPage + 1 === aPage) {
+    if (currentPage === aPage) {
       if (aPage - 3 > 1 && pages.length - aPage > 1) {
         return (
           <CurrentPageButtonDotsAround
@@ -78,43 +77,29 @@ const Pagination: React.FC<PaginationProps> = ({
         </CurrentPageButton>
       );
     }
-    if (currentPage + 1 !== aPage) {
-      if (aPage > 3 && aPage !== pages.length)
-        return "";
-      if (aPage === pages.length && aPage < pages.length - 1) {
-        return (
-          <VisibleButtonDotsLeft
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </VisibleButtonDotsLeft>
-        );
-      }
-      if (aPage === 3 && pages.length > 4 && currentPage + 1 < 3) {
-        return (
-          <VisibleButtonDotsRight
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </VisibleButtonDotsRight>
-        );
-      }
-      if (aPage <= 3 || aPage === pages.length)
-        return (
-          <VisibleButton
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </VisibleButton>
-        );
+    if (aPage === 3 && pages.length > 4 && currentPage < 3) {
+      return (
+        <VisibleButtonDotsRight
+          aria-label={`go to page ${aPage}`}
+          key={Math.random() * 10000}
+          onClick={() => setCurrentPage(aPage)}
+        >
+          {aPage}
+        </VisibleButtonDotsRight>
+      );
     }
-    return;
+    if (aPage <= 3 || aPage === pages.length) {
+      return (
+        <VisibleButton
+          aria-label={`go to page ${aPage}`}
+          key={Math.random() * 10000}
+          onClick={() => setCurrentPage(aPage)}
+        >
+          {aPage}
+        </VisibleButton>
+      );
+    }
+    return "";
   }
 
   return (
@@ -122,10 +107,10 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         aria-label="previous page"
         type="button"
-        disabled={currentPage <= 0}
+        disabled={currentPage <= 1}
         onClick={() => setCurrentPage(currentPage - 1)}
       >
-        <ButtonContent>chevron_left</ButtonContent>
+        <Chevron>previous</Chevron>
       </Button>
       {pages(totalItemsCount, itemsLimitPerPage).map((aPage) => {
         return styledButton(
@@ -137,10 +122,10 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         aria-label="next page"
         type="button"
-        disabled={btnIsDisabled()}
+        disabled={isDisabled()}
         onClick={() => setCurrentPage(currentPage + 1)}
       >
-        <ButtonContent>chevron_right</ButtonContent>
+        <Chevron>next</Chevron>
       </Button>
     </Container>
   );
