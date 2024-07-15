@@ -2,12 +2,8 @@ import { type PaginationProps } from "./types";
 import {
   Container,
   Button,
-  VisibleButtonDotsRight,
   VisibleButton,
   CurrentPageButton,
-  CurrentPageButtonDotsAround,
-  CurrentPageButtonDotsLeft,
-  CurrentPageButtonDotsRight,
   Chevron,
 } from "./styles/styled";
 
@@ -36,35 +32,45 @@ const Pagination: React.FC<PaginationProps> = ({
     if (currentPage === aPage) {
       if (aPage - 3 > 1 && pages.length - aPage > 1) {
         return (
-          <CurrentPageButtonDotsAround
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </CurrentPageButtonDotsAround>
+          <>
+            <span>...</span>
+            <CurrentPageButton
+              aria-label={`go to page ${aPage}`}
+              key={Math.random() * 10000}
+              onClick={() => setCurrentPage(aPage)}
+            >
+              {aPage}
+            </CurrentPageButton>
+            <span>...</span>
+          </>
         );
       }
       if (pages.length - aPage > 1 && aPage > 2) {
         return (
-          <CurrentPageButtonDotsRight
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </CurrentPageButtonDotsRight>
+          <>
+            <CurrentPageButton
+              aria-label={`go to page ${aPage}`}
+              key={Math.random() * 10000}
+              onClick={() => setCurrentPage(aPage)}
+            >
+              {aPage}
+            </CurrentPageButton>
+            <span>...</span>
+          </>
         );
       }
       if (aPage - 3 > 1) {
         return (
-          <CurrentPageButtonDotsLeft
-            aria-label={`go to page ${aPage}`}
-            key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
-          >
-            {aPage}
-          </CurrentPageButtonDotsLeft>
+          <>
+            <span>...</span>
+            <CurrentPageButton
+              aria-label={`go to page ${aPage}`}
+              key={Math.random() * 10000}
+              onClick={() => setCurrentPage(aPage)}
+            >
+              {aPage}
+            </CurrentPageButton>
+          </>
         );
       }
       return (
@@ -79,13 +85,16 @@ const Pagination: React.FC<PaginationProps> = ({
     }
     if (aPage === 3 && pages.length > 4 && currentPage < 3) {
       return (
-        <VisibleButtonDotsRight
-          aria-label={`go to page ${aPage}`}
-          key={Math.random() * 10000}
-          onClick={() => setCurrentPage(aPage)}
-        >
-          {aPage}
-        </VisibleButtonDotsRight>
+        <>
+          <VisibleButton
+            aria-label={`go to page ${aPage}`}
+            key={Math.random() * 10000}
+            onClick={() => setCurrentPage(aPage)}
+          >
+            {aPage}
+          </VisibleButton>
+          <span>...</span>
+        </>
       );
     }
     if (aPage <= 3 || aPage === pages.length) {

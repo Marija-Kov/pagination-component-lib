@@ -46,52 +46,9 @@ export const CurrentPageButton = styled(Button)`
   color: white;
 `;
 
-export const CurrentPageButtonDotsLeft = styled(CurrentPageButton)`
-  &::before {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: white;
-  }
-`;
-
-export const CurrentPageButtonDotsRight = styled(CurrentPageButton)`
-  &::after {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: white;
-  }
-`;
-
-export const CurrentPageButtonDotsAround = styled(CurrentPageButton)`
-  &::before {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: white;
-  }
-
-  &::after {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: white;
-  }
-`;
-
 export const VisibleButton = styled(Button)`
   padding: 0 5px;
   font-size: 0.8em;
-`;
-
-export const VisibleButtonDotsRight = styled(VisibleButton)`
-  &::after {
-    content: "...";
-    display: inline-block;
-    font-size: larger;
-    color: black;
-  }
 `;
 
 // @media screen and (max-width: 450px) {
