@@ -3,7 +3,7 @@
     "registry": "https://npm.pkg.github.com/@marija-kov"
   },
   "name": "@marija-kov/react-component-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/cjs",
   "module": "dist/esm/index.js",
