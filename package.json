@@ -1,6 +1,7 @@
 {
   "name": "@marija-kov/react-component-lib",
   "version": "1.0.2",
+  "private": false,
   "description": "",
   "main": "dist/cjs",
   "module": "dist/esm/index.js",
