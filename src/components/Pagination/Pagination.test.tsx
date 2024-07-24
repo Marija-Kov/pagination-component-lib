@@ -8,7 +8,7 @@ describe("Pagination", () => {
     const limit = 3;
     const total = 100;
     const { getByText, queryByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
     );
 
     const firstPageBtn = getByText("1");
@@ -33,7 +33,7 @@ describe("Pagination", () => {
     const limit = 3;
     const total = 100;
     const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
     );
 
     const nextPageBtn = getByLabelText("next page");
@@ -49,7 +49,7 @@ describe("Pagination", () => {
     const limit = 3;
     const total = 100;
     const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
     );
 
     const pageGreaterThanOne = getByText("3");
@@ -65,7 +65,7 @@ describe("Pagination", () => {
     const limit = 3;
     const total = 100;
     const { getByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
     );
 
     const targetBtn = getByText("3");
@@ -78,7 +78,7 @@ describe("Pagination", () => {
     const limit = 3;
     const total = 100;
     const { getByLabelText, findByText, findAllByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
     );
 
     const targetPageNumber = 7;

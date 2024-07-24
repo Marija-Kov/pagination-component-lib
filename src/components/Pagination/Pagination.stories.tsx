@@ -20,6 +20,12 @@ export default {
         type: "number",
       },
     },
+    curPage: {
+      description: "Current page",
+      control: {
+        type: "number",
+      },
+    },
   },
 };
 
@@ -27,6 +33,7 @@ export const ManyPages = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 100,
+    curPage: 1
   },
 };
 
@@ -34,5 +41,6 @@ export const DisabledChevrons = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 1,
+    curPage: 1
   },
 };
