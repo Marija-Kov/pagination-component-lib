@@ -26,6 +26,12 @@ export default {
         type: "number",
       },
     },
+    setCurPage: {
+      description: "Current page state updater",
+      control: {
+        type: "function",
+      },
+    },
   },
 };
 
@@ -33,7 +39,8 @@ export const ManyPages = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 100,
-    curPage: 1
+    curPage: 2,
+    setCurPage: () => {}
   },
 };
 
@@ -41,6 +48,7 @@ export const DisabledChevrons = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 1,
-    curPage: 1
+    curPage: 1,
+    setCurPage: () => {}
   },
 };

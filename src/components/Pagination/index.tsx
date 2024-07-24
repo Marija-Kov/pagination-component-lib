@@ -12,10 +12,11 @@ import { useState } from "react";
 const Pagination: React.FC<PaginationProps> = ({
   itemsLimitPerPage,
   totalItemsCount,
-  curPage
+  curPage,
+  setCurPage
 }) => {
   const [currentPage, setCurrentPage] = useState(curPage);
-
+  console.log(setCurPage)
   function pages(totalItemsCount: number, itemsLimitPerPage: number) {
     const pagesCount = Math.ceil(totalItemsCount / itemsLimitPerPage);
     const result = [];

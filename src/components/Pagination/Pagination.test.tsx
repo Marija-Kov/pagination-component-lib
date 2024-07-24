@@ -7,17 +7,18 @@ describe("Pagination", () => {
   it("renders the correct (number of) pagination buttons", () => {
     const limit = 3;
     const total = 100;
+    const mockSetCurPage: React.Dispatch<React.SetStateAction<number>> = () => {};
     const { getByText, queryByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} setCurPage={mockSetCurPage} />
     );
-
+    
     const firstPageBtn = getByText("1");
     const lastPageBtn = getByText("34");
     const prevPageBtn = getByLabelText("previous page");
     const nextPageBtn = getByLabelText("next page");
     const hiddenPageBtn = queryByText("14");
     const ellipsis = getByText("...");
-
+    
     expect(firstPageBtn).toBeInTheDocument();
     expect(firstPageBtn).toHaveStyle("background: black; color: white");
     expect(lastPageBtn).toBeInTheDocument();
@@ -27,15 +28,16 @@ describe("Pagination", () => {
     expect(hiddenPageBtn).toBeNull();
     expect(ellipsis).toBeInTheDocument();
   });
-
+  
   it("navigates to the next page when 'next' button is clicked", async () => {
     user.setup();
     const limit = 3;
     const total = 100;
+    const mockSetCurPage: React.Dispatch<React.SetStateAction<number>> = () => {};
     const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} setCurPage={mockSetCurPage} />
     );
-
+    
     const nextPageBtn = getByLabelText("next page");
     await user.click(nextPageBtn);
     const secondPageBtn = getByText("2");
@@ -43,15 +45,16 @@ describe("Pagination", () => {
     expect(secondPageBtn).toHaveStyle("background: black; color: white;");
     expect(prevPageBtn).not.toHaveAttribute("disabled");
   });
-
+  
   it("navigates to the previous page when 'previous' button is clicked", async () => {
     user.setup();
     const limit = 3;
     const total = 100;
+    const mockSetCurPage: React.Dispatch<React.SetStateAction<number>> = () => {};
     const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} setCurPage={mockSetCurPage} />
     );
-
+    
     const pageGreaterThanOne = getByText("3");
     const prevPageBtn = getByLabelText("previous page");
     await user.click(pageGreaterThanOne);
@@ -64,21 +67,23 @@ describe("Pagination", () => {
     user.setup();
     const limit = 3;
     const total = 100;
+    const mockSetCurPage: React.Dispatch<React.SetStateAction<number>> = () => {};
     const { getByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} setCurPage={mockSetCurPage} />
     );
-
+    
     const targetBtn = getByText("3");
     user.click(targetBtn);
     expect(targetBtn).toHaveStyle("background: black; color: white;");
   });
-
+  
   it("surrounds current page button with ellipsis", async () => {
     user.setup();
     const limit = 3;
     const total = 100;
+    const mockSetCurPage: React.Dispatch<React.SetStateAction<number>> = () => {};
     const { getByLabelText, findByText, findAllByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} />
+      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} curPage={1} setCurPage={mockSetCurPage} />
     );
 
     const targetPageNumber = 7;
