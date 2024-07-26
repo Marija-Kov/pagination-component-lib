@@ -10,14 +10,14 @@ const PaginationParent: React.FC<PaginationParentProps> = ({
   itemsLimitPerPage,
   totalItemsCount,
 }) => {
-  const [mockCurPage, setMockCurPage] = useState(1);
+  const [mockCurrentPage, setMockCurrentPage] = useState(1);
   return (
     <div className="mock-parent">
       <Pagination
         itemsLimitPerPage={itemsLimitPerPage}
         totalItemsCount={totalItemsCount}
-        curPage={mockCurPage}
-        setCurPage={setMockCurPage}
+        currentPage={mockCurrentPage}
+        setCurrentPage={setMockCurrentPage}
       />
     </div>
   );

@@ -10,8 +10,8 @@ import {
 const Pagination: React.FC<PaginationProps> = ({
   itemsLimitPerPage,
   totalItemsCount,
-  curPage,
-  setCurPage,
+  currentPage,
+  setCurrentPage,
 }) => {
   function pages(totalItemsCount: number, itemsLimitPerPage: number) {
     const pagesCount = Math.ceil(totalItemsCount / itemsLimitPerPage);
@@ -23,11 +23,11 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   function isDisabled() {
-    return curPage * itemsLimitPerPage >= totalItemsCount;
+    return currentPage * itemsLimitPerPage >= totalItemsCount;
   }
 
-  function styledButton(curPage: number, aPage: number, pages: number[]) {
-    if (curPage === aPage) {
+  function styledButton(currentPage: number, aPage: number, pages: number[]) {
+    if (currentPage === aPage) {
       if (aPage - 3 > 1 && pages.length - aPage > 1) {
         return (
           <>
@@ -35,7 +35,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurPage(aPage)}
+              onClick={() => setCurrentPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -49,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurPage(aPage)}
+              onClick={() => setCurrentPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -64,7 +64,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurPage(aPage)}
+              onClick={() => setCurrentPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -75,19 +75,19 @@ const Pagination: React.FC<PaginationProps> = ({
         <CurrentPageButton
           aria-label={`go to page ${aPage}`}
           key={Math.random() * 10000}
-          onClick={() => setCurPage(aPage)}
+          onClick={() => setCurrentPage(aPage)}
         >
           {aPage}
         </CurrentPageButton>
       );
     }
-    if (aPage === 3 && pages.length > 4 && curPage < 3) {
+    if (aPage === 3 && pages.length > 4 && currentPage < 3) {
       return (
         <>
           <VisibleButton
             aria-label={`go to page ${aPage}`}
             key={Math.random() * 10000}
-            onClick={() => setCurPage(aPage)}
+            onClick={() => setCurrentPage(aPage)}
           >
             {aPage}
           </VisibleButton>
@@ -100,7 +100,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <VisibleButton
           aria-label={`go to page ${aPage}`}
           key={Math.random() * 10000}
-          onClick={() => setCurPage(aPage)}
+          onClick={() => setCurrentPage(aPage)}
         >
           {aPage}
         </VisibleButton>
@@ -114,14 +114,14 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         aria-label="previous page"
         type="button"
-        disabled={curPage <= 1}
-        onClick={() => setCurPage(curPage - 1)}
+        disabled={currentPage <= 1}
+        onClick={() => setCurrentPage(currentPage - 1)}
       >
         <Chevron>previous</Chevron>
       </Button>
       {pages(totalItemsCount, itemsLimitPerPage).map((aPage) => {
         return styledButton(
-          curPage,
+          currentPage,
           aPage,
           pages(totalItemsCount, itemsLimitPerPage)
         );
@@ -130,7 +130,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label="next page"
         type="button"
         disabled={isDisabled()}
-        onClick={() => setCurPage(curPage + 1)}
+        onClick={() => setCurrentPage(currentPage + 1)}
       >
         <Chevron>next</Chevron>
       </Button>

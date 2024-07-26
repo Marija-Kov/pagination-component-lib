@@ -8,16 +8,16 @@ describe("Pagination", () => {
   it("renders the correct (number of) pagination buttons", () => {
     const limit = 3;
     const total = 100;
-    const mockCurPage = 1;
-    const setMockCurPage: React.Dispatch<
+    const mockCurrentPage = 1;
+    const setMockCurrentPage: React.Dispatch<
       React.SetStateAction<number>
     > = () => {};
     const { getByText, queryByText, getByLabelText } = render(
       <Pagination
         itemsLimitPerPage={limit}
         totalItemsCount={total}
-        curPage={mockCurPage}
-        setCurPage={setMockCurPage}
+        currentPage={mockCurrentPage}
+        setCurrentPage={setMockCurrentPage}
       />
     );
 
@@ -41,7 +41,7 @@ describe("Pagination", () => {
   it("navigates to the next page when 'next' button is clicked", async () => {
     user.setup();
     const MockParentComponent = () => {
-      const [mockCurPage, setMockCurPage] = useState(1);
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
       const limit = 3;
       const total = 100;
       return (
@@ -49,8 +49,8 @@ describe("Pagination", () => {
           <Pagination
             itemsLimitPerPage={limit}
             totalItemsCount={total}
-            curPage={mockCurPage}
-            setCurPage={setMockCurPage}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
           />
         </div>
       );
@@ -68,7 +68,7 @@ describe("Pagination", () => {
   it("navigates to the previous page when 'previous' button is clicked", async () => {
     user.setup();
     const MockParentComponent = () => {
-      const [mockCurPage, setMockCurPage] = useState(3);
+      const [mockCurrentPage, setMockCurrentPage] = useState(3);
       const limit = 3;
       const total = 100;
       return (
@@ -76,8 +76,8 @@ describe("Pagination", () => {
           <Pagination
             itemsLimitPerPage={limit}
             totalItemsCount={total}
-            curPage={mockCurPage}
-            setCurPage={setMockCurPage}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
           />
         </div>
       );
@@ -93,7 +93,7 @@ describe("Pagination", () => {
   it("navigates to page N when button N is clicked", async () => {
     user.setup();
     const MockParentComponent = () => {
-      const [mockCurPage, setMockCurPage] = useState(1);
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
       const limit = 3;
       const total = 100;
       return (
@@ -101,8 +101,8 @@ describe("Pagination", () => {
           <Pagination
             itemsLimitPerPage={limit}
             totalItemsCount={total}
-            curPage={mockCurPage}
-            setCurPage={setMockCurPage}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
           />
         </div>
       );
@@ -117,7 +117,7 @@ describe("Pagination", () => {
   it("surrounds current page button with ellipsis", async () => {
     user.setup();
     const MockParentComponent = () => {
-      const [mockCurPage, setMockCurPage] = useState(1);
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
       const limit = 3;
       const total = 100;
       return (
@@ -125,8 +125,8 @@ describe("Pagination", () => {
           <Pagination
             itemsLimitPerPage={limit}
             totalItemsCount={total}
-            curPage={mockCurPage}
-            setCurPage={setMockCurPage}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
           />
         </div>
       );
