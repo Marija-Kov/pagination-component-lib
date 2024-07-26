@@ -1,8 +1,31 @@
+import React, { useState } from "react";
 import Pagination from ".";
+
+interface PaginationParentProps {
+  itemsLimitPerPage: number;
+  totalItemsCount: number;
+}
+
+const PaginationParent: React.FC<PaginationParentProps> = ({
+  itemsLimitPerPage,
+  totalItemsCount,
+}) => {
+  const [mockCurrentPage, setMockCurrentPage] = useState(1);
+  return (
+    <div className="mock-parent">
+      <Pagination
+        itemsLimitPerPage={itemsLimitPerPage}
+        totalItemsCount={totalItemsCount}
+        currentPage={mockCurrentPage}
+        setCurrentPage={setMockCurrentPage}
+      />
+    </div>
+  );
+};
 
 export default {
   title: "Components/Pagination",
-  component: Pagination,
+  component: PaginationParent,
   parameters: {
     layout: "centered",
   },

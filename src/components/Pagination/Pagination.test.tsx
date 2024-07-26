@@ -2,13 +2,23 @@ import "@testing-library/jest-dom";
 import Pagination from ".";
 import { render } from "@testing-library/react";
 import user from "@testing-library/user-event";
+import React, { useState } from "react";
 
 describe("Pagination", () => {
   it("renders the correct (number of) pagination buttons", () => {
     const limit = 3;
     const total = 100;
+    const mockCurrentPage = 1;
+    const setMockCurrentPage: React.Dispatch<
+      React.SetStateAction<number>
+    > = () => {};
     const { getByText, queryByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+      <Pagination
+        itemsLimitPerPage={limit}
+        totalItemsCount={total}
+        currentPage={mockCurrentPage}
+        setCurrentPage={setMockCurrentPage}
+      />
     );
 
     const firstPageBtn = getByText("1");
@@ -30,11 +40,22 @@ describe("Pagination", () => {
 
   it("navigates to the next page when 'next' button is clicked", async () => {
     user.setup();
-    const limit = 3;
-    const total = 100;
-    const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
-    );
+    const MockParentComponent = () => {
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
+      const limit = 3;
+      const total = 100;
+      return (
+        <div className="mock-parent">
+          <Pagination
+            itemsLimitPerPage={limit}
+            totalItemsCount={total}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
+          />
+        </div>
+      );
+    };
+    const { getByText, getByLabelText } = render(<MockParentComponent />);
 
     const nextPageBtn = getByLabelText("next page");
     await user.click(nextPageBtn);
@@ -46,15 +67,24 @@ describe("Pagination", () => {
 
   it("navigates to the previous page when 'previous' button is clicked", async () => {
     user.setup();
-    const limit = 3;
-    const total = 100;
-    const { getByText, getByLabelText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
-    );
+    const MockParentComponent = () => {
+      const [mockCurrentPage, setMockCurrentPage] = useState(3);
+      const limit = 3;
+      const total = 100;
+      return (
+        <div className="mock-parent">
+          <Pagination
+            itemsLimitPerPage={limit}
+            totalItemsCount={total}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
+          />
+        </div>
+      );
+    };
+    const { getByText, getByLabelText } = render(<MockParentComponent />);
 
-    const pageGreaterThanOne = getByText("3");
     const prevPageBtn = getByLabelText("previous page");
-    await user.click(pageGreaterThanOne);
     await user.click(prevPageBtn);
     const pageLesserByOne = getByText("2");
     expect(pageLesserByOne).toHaveStyle("background: black; color: white;");
@@ -62,11 +92,22 @@ describe("Pagination", () => {
 
   it("navigates to page N when button N is clicked", async () => {
     user.setup();
-    const limit = 3;
-    const total = 100;
-    const { getByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
-    );
+    const MockParentComponent = () => {
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
+      const limit = 3;
+      const total = 100;
+      return (
+        <div className="mock-parent">
+          <Pagination
+            itemsLimitPerPage={limit}
+            totalItemsCount={total}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
+          />
+        </div>
+      );
+    };
+    const { getByText } = render(<MockParentComponent />);
 
     const targetBtn = getByText("3");
     user.click(targetBtn);
@@ -75,10 +116,23 @@ describe("Pagination", () => {
 
   it("surrounds current page button with ellipsis", async () => {
     user.setup();
-    const limit = 3;
-    const total = 100;
-    const { getByLabelText, findByText, findAllByText } = render(
-      <Pagination itemsLimitPerPage={limit} totalItemsCount={total} />
+    const MockParentComponent = () => {
+      const [mockCurrentPage, setMockCurrentPage] = useState(1);
+      const limit = 3;
+      const total = 100;
+      return (
+        <div className="mock-parent">
+          <Pagination
+            itemsLimitPerPage={limit}
+            totalItemsCount={total}
+            currentPage={mockCurrentPage}
+            setCurrentPage={setMockCurrentPage}
+          />
+        </div>
+      );
+    };
+    const { findByText, findAllByText, getByLabelText } = render(
+      <MockParentComponent />
     );
 
     const targetPageNumber = 7;

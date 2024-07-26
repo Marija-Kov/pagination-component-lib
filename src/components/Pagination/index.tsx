@@ -7,14 +7,12 @@ import {
   Chevron,
 } from "./styles/styled";
 
-import { useState } from "react";
-
 const Pagination: React.FC<PaginationProps> = ({
   itemsLimitPerPage,
   totalItemsCount,
+  currentPage,
+  setCurrentPage,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
   function pages(totalItemsCount: number, itemsLimitPerPage: number) {
     const pagesCount = Math.ceil(totalItemsCount / itemsLimitPerPage);
     const result = [];
