@@ -7,16 +7,12 @@ import {
   Chevron,
 } from "./styles/styled";
 
-import { useState } from "react";
-
 const Pagination: React.FC<PaginationProps> = ({
   itemsLimitPerPage,
   totalItemsCount,
   curPage,
-  setCurPage
+  setCurPage,
 }) => {
-  const [currentPage, setCurrentPage] = useState(curPage);
-  console.log(setCurPage)
   function pages(totalItemsCount: number, itemsLimitPerPage: number) {
     const pagesCount = Math.ceil(totalItemsCount / itemsLimitPerPage);
     const result = [];
@@ -27,11 +23,11 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   function isDisabled() {
-    return currentPage * itemsLimitPerPage >= totalItemsCount;
+    return curPage * itemsLimitPerPage >= totalItemsCount;
   }
 
-  function styledButton(currentPage: number, aPage: number, pages: number[]) {
-    if (currentPage === aPage) {
+  function styledButton(curPage: number, aPage: number, pages: number[]) {
+    if (curPage === aPage) {
       if (aPage - 3 > 1 && pages.length - aPage > 1) {
         return (
           <>
@@ -39,7 +35,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurrentPage(aPage)}
+              onClick={() => setCurPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -53,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurrentPage(aPage)}
+              onClick={() => setCurPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -68,7 +64,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <CurrentPageButton
               aria-label={`go to page ${aPage}`}
               key={Math.random() * 10000}
-              onClick={() => setCurrentPage(aPage)}
+              onClick={() => setCurPage(aPage)}
             >
               {aPage}
             </CurrentPageButton>
@@ -79,19 +75,19 @@ const Pagination: React.FC<PaginationProps> = ({
         <CurrentPageButton
           aria-label={`go to page ${aPage}`}
           key={Math.random() * 10000}
-          onClick={() => setCurrentPage(aPage)}
+          onClick={() => setCurPage(aPage)}
         >
           {aPage}
         </CurrentPageButton>
       );
     }
-    if (aPage === 3 && pages.length > 4 && currentPage < 3) {
+    if (aPage === 3 && pages.length > 4 && curPage < 3) {
       return (
         <>
           <VisibleButton
             aria-label={`go to page ${aPage}`}
             key={Math.random() * 10000}
-            onClick={() => setCurrentPage(aPage)}
+            onClick={() => setCurPage(aPage)}
           >
             {aPage}
           </VisibleButton>
@@ -104,7 +100,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <VisibleButton
           aria-label={`go to page ${aPage}`}
           key={Math.random() * 10000}
-          onClick={() => setCurrentPage(aPage)}
+          onClick={() => setCurPage(aPage)}
         >
           {aPage}
         </VisibleButton>
@@ -118,14 +114,14 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         aria-label="previous page"
         type="button"
-        disabled={currentPage <= 1}
-        onClick={() => setCurrentPage(currentPage - 1)}
+        disabled={curPage <= 1}
+        onClick={() => setCurPage(curPage - 1)}
       >
         <Chevron>previous</Chevron>
       </Button>
       {pages(totalItemsCount, itemsLimitPerPage).map((aPage) => {
         return styledButton(
-          currentPage,
+          curPage,
           aPage,
           pages(totalItemsCount, itemsLimitPerPage)
         );
@@ -134,7 +130,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label="next page"
         type="button"
         disabled={isDisabled()}
-        onClick={() => setCurrentPage(currentPage + 1)}
+        onClick={() => setCurPage(curPage + 1)}
       >
         <Chevron>next</Chevron>
       </Button>

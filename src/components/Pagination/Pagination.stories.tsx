@@ -1,8 +1,31 @@
+import React, { useState } from "react";
 import Pagination from ".";
+
+interface PaginationParentProps {
+  itemsLimitPerPage: number;
+  totalItemsCount: number;
+}
+
+const PaginationParent: React.FC<PaginationParentProps> = ({
+  itemsLimitPerPage,
+  totalItemsCount,
+}) => {
+  const [mockCurPage, setMockCurPage] = useState(1);
+  return (
+    <div className="mock-parent">
+      <Pagination
+        itemsLimitPerPage={itemsLimitPerPage}
+        totalItemsCount={totalItemsCount}
+        curPage={mockCurPage}
+        setCurPage={setMockCurPage}
+      />
+    </div>
+  );
+};
 
 export default {
   title: "Components/Pagination",
-  component: Pagination,
+  component: PaginationParent,
   parameters: {
     layout: "centered",
   },
@@ -20,18 +43,6 @@ export default {
         type: "number",
       },
     },
-    curPage: {
-      description: "Current page",
-      control: {
-        type: "number",
-      },
-    },
-    setCurPage: {
-      description: "Current page state updater",
-      control: {
-        type: "function",
-      },
-    },
   },
 };
 
@@ -39,8 +50,6 @@ export const ManyPages = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 100,
-    curPage: 2,
-    setCurPage: () => {}
   },
 };
 
@@ -48,7 +57,5 @@ export const DisabledChevrons = {
   args: {
     itemsLimitPerPage: 3,
     totalItemsCount: 1,
-    curPage: 1,
-    setCurPage: () => {}
   },
 };
