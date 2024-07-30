@@ -39,6 +39,6 @@ export default [
       },
     ],
     plugins: [dts()],
-    external: [/\.css$/],
+    external: [/\.css$/, "react", "react-dom"],
   },
 ];
