@@ -39,6 +39,16 @@ export default [
       },
     ],
     plugins: [dts()],
-    external: [/\.css$/, "react", "react-dom"],
+    external: [
+      /\.css$/,
+      "react",
+      "react-dom",
+      "styled-components",
+      "@storybook/react",
+      "@storybook/react-vite",
+      "@testing-library/react",
+      "@types/react",
+      "eslint-plugin-react",
+    ],
   },
 ];
